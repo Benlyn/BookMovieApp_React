@@ -153,6 +153,14 @@ class Header extends Component {
         
         if (this.state.email === "" || this.state.firstname === "" || this.state.lastname === "" || this.state.mobile === "" || this.state.passwordReg === "")
         { return; }
+        
+        let registerData = JSON.stringify({
+            email_address:  this.state.email,
+            first_name:   this.state.firstname,
+            last_name:  this.state.lastname,
+            mobile_number:this.state.mobile,
+            password:this.state.passwordReg
+        });
 
         await fetch(this.props.baseUrl + "signup",
             {
@@ -161,9 +169,11 @@ class Header extends Component {
                     'Content-Type': 'application/json',
                     'Cache-Control': 'no-cache'
                 },
+                body:registerData,
+
             })
             .then(async response => {
-                this.setState({ registrationSuccess: true })
+                this.setState({ isRegistrationSuccess: true })
             })
     }
 
